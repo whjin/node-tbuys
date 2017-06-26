@@ -1,0 +1,40 @@
+{
+  "name": "tbuys",
+  "version": "1.0.0",
+  "description": "A shopping EB website.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whjin/TBuys.git"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "whjin",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "middleware": "^1.0.0",
+    "mongoose": "^4.10.6",
+    "multer": "^0.1.8",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "bugs": {
+    "url": "https://github.com/whjin/TBuys/issues"
+  },
+  "homepage": "https://github.com/whjin/TBuys#readme"
+}

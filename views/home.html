@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品主页</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<ul class="spys">
+    <%for(var i in Commoditys){
+    if(!Commoditys[i].name) continue;%>
+    <li class="spys li">
+        <div>
+            <img src="img/<%=Commoditys[i].imgSrc%>" width="80" height="100">
+        </div>
+        <div>
+            <a><%=Commoditys[i].name%></a>
+            <strong style="color: red;">￥<%=Commoditys[i].price%></strong>
+        </div>
+        <div>
+            <a class="btn btn-success" style="width: 120px;" href="">加入购物车</a>
+        </div>
+    </li>
+    <%}%>
+</ul>
+</body>
+</html>

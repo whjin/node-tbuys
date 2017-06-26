@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script>
+    //imgSrc表示图片路径)，这里内置了5张图片，格式为：xmsz-X.jpg(X为1-5数字)。
+    var data = $("form").serialize() + "&imgSrc=" + "xmsz-" + Math.floor(Math.random() * 5 + 1) + ".jpg";
+    $ajax({
+        url: './addcommodity',
+        type: 'POST',
+        data: data,
+        success: function (data, status) {
+            if (status == 'success') {
+                alert("添加成功！");
+            }
+        },
+        error: function (data, err) {
+            alert("添加失败！");
+        }
+    })
+</script>
+</body>
+</html>
