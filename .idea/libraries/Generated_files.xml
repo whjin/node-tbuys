@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/common/dbHelper.js" />
+        <item url="file://$PROJECT_DIR$/dist/routes/home.js" />
+        <item url="file://$PROJECT_DIR$/dist/app.js" />
+        <item url="file://$PROJECT_DIR$/dist/common/models.js" />
+        <item url="file://$PROJECT_DIR$/dist/routes/register.js" />
+        <item url="file://$PROJECT_DIR$/dist/lib/bootstrap.min.js" />
+        <item url="file://$PROJECT_DIR$/dist/routes/login.js" />
+        <item url="file://$PROJECT_DIR$/dist/routes/index.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/common/dbHelper.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/home.js" />
+      <root url="file://$PROJECT_DIR$/dist/app.js" />
+      <root url="file://$PROJECT_DIR$/dist/common/models.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/register.js" />
+      <root url="file://$PROJECT_DIR$/dist/lib/bootstrap.min.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/login.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/index.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
