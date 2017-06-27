@@ -1,9 +1,8 @@
-﻿# TBuys #
+﻿# [TBuys - 项目分解][1] #
 
 用户购物电商网站：Node.js+Express+MongoDB+Mongoose
 
 ## 步骤 ##
-
 
 > 
 1. `git clone path`下载项目到本地；
@@ -14,3 +13,5 @@
 ## 后续 ##
 
 此项目只是完成了基本的内容，如果感兴趣，可以进行扩展，变更，使这个电商网站系统更加完善，稳定。
+
+[1]:https://github.com/whjin/EBWebsite
