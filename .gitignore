@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea/workspace.xml
+.idea
 dist/
 node_modules/
 public/
