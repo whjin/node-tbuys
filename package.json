@@ -10,7 +10,7 @@
     "multer": "~0.1.6",
     "path": "~0.4.9",
     "mongoose": "~3.8.1",
-    "ejs": "~0.8.5"
+    "ejs": "~2.5.5"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1"
