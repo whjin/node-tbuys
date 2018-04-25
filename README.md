@@ -2,8 +2,6 @@
 
 用户购物电商网站：Node+Express+MongoDB+Mongoose
 
-项目地址：https://github.com/whjin/TBuys
-
 **实现功能：**
 
 1. 注册
@@ -25,7 +23,7 @@
 # 依赖更新解决 #
 
 - 在更新了依赖库之后，`bson`在`node-modules`下没有`build/Release/bson.js`这个库文件，所有需要手动添加这个依赖库；
-- 推荐使用原项目的依赖版本，可以满足实际需求。
+- **推荐使用原项目的依赖版本，可以满足实际需求。**
 
 # 连接MongoDB数据库的问题 #
 
@@ -35,3 +33,6 @@
 ## 后续 ##
 
 > 此项目只是完成了基本的内容，如果感兴趣，可以进行扩展，变更，使这个电商网站系统更加完善，稳定。
+> 欢迎在`issues`提交问题和建议。
+
+**欢迎Follower我的[Github](https://github.com/whjin)，站点：[寒青](https://segmentfault.com/u/whjin)，博客：[Blog](https://github.com/whjin/blog)**
