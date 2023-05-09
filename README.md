@@ -1,4 +1,4 @@
-﻿# TBuys #
+﻿# Node-TBuys #
 
 用户购物电商网站：Node+Express+MongoDB+Mongoose
 
@@ -35,4 +35,4 @@
 > 此项目只是完成了基本的内容，如果感兴趣，可以进行扩展，变更，使这个电商网站系统更加完善，稳定。
 > 欢迎在`issues`提交问题和建议。
 
-**欢迎Follow我的[Github](https://github.com/whjin)，站点：[寒青](https://segmentfault.com/u/whjin)，博客：[Blog](https://github.com/whjin/blog)**
+**欢迎Follow我的[Github](https://github.com/whjin)，站点：[项目总集](https://whjin.github.io/docs/)，博客：[吴华锦](https://whjin.github.io/)**
