@@ -28,8 +28,8 @@ app.set('view engine', 'html');
 app.engine('.html', require('ejs').__express);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(multer());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer({ dest: __dirname + 'public' }).any());
 
 // 设定静态文件目录，比如本地文件
 app.use(express.static(path.join(__dirname, 'public')));
