@@ -4,4 +4,4 @@ module.exports = function (app) {
         req.session.error = null;
         res.redirect('/');
     });
-}
+};

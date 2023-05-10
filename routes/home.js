@@ -3,7 +3,7 @@ module.exports = function (app) {
         if (req.session.user) {
             var Commodity = global.dbHelper.getModel('commodity');
             Commodity.find({}, function (error, docs) {
-                res.render('home', {Commoditys: docs});
+                res.render('home', { Commoditys: docs });
             });
         } else {
             req.session.error = "请先登录";

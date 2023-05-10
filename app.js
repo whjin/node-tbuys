@@ -9,9 +9,11 @@ var session = require('express-session');
 
 global.dbHelper = require('./common/dbHelper');
 
-global.db = mongoose.connect("mongodb://127.0.0.1:27017/test1");
+global.db = mongoose.connect("mongodb://127.0.0.1:27017/tbuysdb");
 
 app.use(session({
+    resave: false,
+    saveUninitialized: true,
     secret: 'secret',
     cookie: {
         maxAge: 1000 * 60 * 30
@@ -50,6 +52,6 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-console.log("Server is running on the port: 3000");
+console.log("Server is running on http://localhost:3000");
 
 

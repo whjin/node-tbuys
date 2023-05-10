@@ -17,7 +17,7 @@
 > 
 1. `git clone path`下载项目到本地；
 2. `npm install`安装依赖和相关插件;
-3. 安装`MongoDB`,设定数据库存放位置`mongod --dbpath "D:\MongoDB\data\test1"`，可以自主设定，启动数据库；
+3. 安装`MongoDB`,设定数据库存放位置`mongod --dbpath "D:\MongoDB\data\tbuysdb"`，可以自主设定，启动数据库；
 4. 运行项目`node app.js`,打开浏览器进行测试，端口号`3000`，可自由设定监听端口
 
 ## 依赖更新解决 ##
@@ -27,7 +27,7 @@
 
 ## 连接MongoDB数据库的问题 ##
 
-- 这个项目的数据存放在`MongoDB`下的`data/test1`文件夹下，这个文件夹是手动创建的，可以根据需要自行调整；
+- 这个项目的数据存放在`MongoDB`下的`data/tbuysdb`文件夹下，这个文件夹是手动创建的，可以根据需要自行调整；
 - 连接数据库的操作步骤是：在`cmd/PowerShell`或Linux终端上进入`mongodb/bin`文件夹，Windows用户可以进入`mongodb/bin`文件夹按住Shift键点击鼠标右键可以快速进入`cmd/PowerShell`，输入MongoDB数据库启动命令：`mongod --dbpath "数据存放位置"`（上面有提及）。如果在操作时没有响应，可以按`Ctrl+X`键即可。
 
 ## 后续 ##
