@@ -1,11 +1,11 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var mongoose = require("mongoose");
+const express = require('express');
+const app = express();
+const path = require('path');
+const mongoose = require("mongoose");
 
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var session = require('express-session');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const session = require('express-session');
 
 global.dbHelper = require('./common/dbHelper');
 
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
     res.locals.user = req.session.user;
-    var err = req.session.error;
+    let err = req.session.error;
     res.locals.message = '';
     if (err) res.locals.message = '<div class="alert alert-danger" style="margin-bottom: 20px;color:red;">' + err + '</div>';
     next();

@@ -22,8 +22,8 @@
     <script src="/js/bootstrap.min.js"></script>
     <script>
         function addcommodity () {
-            var name = $('#cname').val(), price = $('#cprice').val();
-            var data = { "name": name, price: price, "imgSrc": "xmsz-" + Math.floor(Math.random() * 5 + 1) + ".jpg" };
+            let name = $('#cname').val(), price = $('#cprice').val();
+            let data = { "name": name, price: price, "imgSrc": "xmsz-" + Math.floor(Math.random() * 5 + 1) + ".jpg" };
             $.ajax({
                 url: '/addcommodity',
                 type: 'POST',

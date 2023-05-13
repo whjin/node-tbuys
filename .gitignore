@@ -11,4 +11,3 @@ gen
 node_modules
 package-lock.json
 yarn.lock
-mongod.bat

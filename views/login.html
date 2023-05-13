@@ -55,8 +55,8 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<script>
 		function login () {
-			var username = $('#username').val(), password = $('#password').val();
-			var data = { "uname": username, "upwd": password };
+			let username = $('#username').val(), password = $('#password').val();
+			let data = { "uname": username, "upwd": password };
 			$.ajax({
 				url: '/login',
 				type: 'POST',

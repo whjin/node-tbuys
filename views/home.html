@@ -43,7 +43,7 @@
 			</div>
 			<div class="panel-body">
 				<ul class="spys">
-					<%for(var i in Commoditys){ if(!Commoditys[i].name)continue;%>
+					<%for(let i in Commoditys){ if(!Commoditys[i].name)continue;%>
 						<li class="spys li">
 							<div>
 								<img width="80" height="100" src="/images/<%=Commoditys[i].imgSrc%>">
@@ -56,7 +56,9 @@
 							</div>
 							<div>
 								<a class="btn btn-primary btn-sm" style="width: fit-content;"
-									href="/addToCart/<%=Commoditys[i]._id%>">加入购物车</a>
+									href="/addToCart/<%=Commoditys[i]._id%>" onclick="alert('加入购物车成功')">加入购物车</a>
+								<a class="btn btn-danger btn-sm" style="width: fit-content;"
+									href="/delFromCommodity/<%=Commoditys[i]._id%>">删除</a>
 							</div>
 						</li>
 						<%}%>

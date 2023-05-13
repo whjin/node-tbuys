@@ -1,8 +1,8 @@
-﻿var mongoose = require('mongoose'),
+﻿let mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     models = require('./models');
 
-for (var m in models) {
+for (let m in models) {
     mongoose.model(m, new Schema(models[m]));
 }
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     }
 };
 
-var _getModel = function (type) {
+let _getModel = function (type) {
     return mongoose.model(type);
 };
 

@@ -1,7 +1,7 @@
 module.exports = function (app) {
     app.get('/home', function (req, res) {
         if (req.session.user) {
-            var Commodity = global.dbHelper.getModel('commodity');
+            let Commodity = global.dbHelper.getModel('commodity');
             Commodity.find({}, function (error, docs) {
                 res.render('home', { Commoditys: docs });
             });
@@ -14,7 +14,7 @@ module.exports = function (app) {
         res.render('addcommodity');
     });
     app.post('/addcommodity', function (req, res) {
-        var Commodity = global.dbHelper.getModel('commodity');
+        let Commodity = global.dbHelper.getModel('commodity');
         Commodity.create({
             name: req.body.name,
             price: req.body.price,
@@ -25,6 +25,13 @@ module.exports = function (app) {
             } else {
                 res.sendStatus(404);
             }
+        });
+    });
+    // 删除商品
+    app.get("/delFromCommodity/:id", function (req, res) {
+        let Commidity = global.dbHelper.getModel('commodity');
+        Commidity.deleteOne({ "_id": req.params.id }, function (err, doc) {
+            res.redirect("/home");
         });
     });
 };

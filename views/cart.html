@@ -86,7 +86,7 @@
                 </div>
                 <div class="cart-body">
                     <ul>
-                        <%for(var i in carts){ if(!carts[i].cId)continue%>
+                        <%for(let i in carts){ if(!carts[i].cId)continue%>
                             <li>
                                 <div class="li-checkbox">
                                     <input data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>"
@@ -133,8 +133,8 @@
         $(function () {
             // 商品+-
             $('.li-quantity a').click(function () {
-                var self = $(this);
-                var type = self.attr('data-type'),
+                let self = $(this);
+                let type = self.attr('data-type'),
                     num = parseFloat(self.siblings('input').val());
                 if (type == 'add') {
                     num += 1;
@@ -151,14 +151,14 @@
 
             //checkbox 单选事件
             $('input[name="chkItem"]:checkbox').click(function () {
-                var isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true;
+                let isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true;
                 $('#CheckAll').prop("checked", isCheck);
                 tamount();
             });
 
             //checkbox 全选事件
             $('#CheckAll').click(function () {
-                var self = $(this);
+                let self = $(this);
                 $('input[name="chkItem"]').each(function () {
                     $(this).prop("checked", self.is(':checked'));
                 });
@@ -166,16 +166,16 @@
             });
 
         });
-        var sum = 0;
+        let sum = 0;
 
         //用户结算
         function Clearing () {
             $('input[name="chkItem"]:checked').each(function () {
-                var self = $(this),
+                let self = $(this),
                     index = self.attr('data-index'),
                     cid = self.attr('data-id');
-                var quantity = $('#Q' + index).val();
-                var data = { "cid": cid, "cnum": quantity };
+                let quantity = $('#Q' + index).val();
+                let data = { "cid": cid, "cnum": quantity };
                 $.ajax({
                     url: '/cart/clearing',
                     type: 'post',
@@ -188,18 +188,22 @@
                     }
                 });
             });
-            alert('￥' + sum);
-            location.href = "cart";
+            if (sum) {
+                alert('￥' + sum);
+                location.href = "cart";
+            } else {
+                alert("请选择要结算的商品");
+            }
         }
 
         //计算商品总价格
         function tamount () {
             sum = 0;
             $('input[name="chkItem"]:checked').each(function () {
-                var self = $(this),
+                let self = $(this),
                     price = self.attr('data-price'),
                     index = self.attr('data-index');
-                var quantity = $('#Q' + index).val();
+                let quantity = $('#Q' + index).val();
                 sum += (parseFloat(price) * parseFloat(quantity));
             });
             $("#money").html('￥' + sum + '.00');

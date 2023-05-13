@@ -56,9 +56,9 @@
   <script src="/js/bootstrap.min.js"></script>
   <script>
     function register () {
-      var name = $('#username').val(),
+      let name = $('#username').val(),
         password = $('#password').val();
-      var data = { "uname": name, upwd: password };
+      let data = { "uname": name, upwd: password };
       $.ajax({
         url: '/register',
         type: 'POST',

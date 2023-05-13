@@ -4,7 +4,7 @@ module.exports = function (app) {
     });
 
     app.post('/register', function (req, res) {
-        var User = global.dbHelper.getModel('user'),
+        let User = global.dbHelper.getModel('user'),
             uname = req.body.uname;
         User.findOne({ name: uname }, function (error, doc) {
             if (error) {

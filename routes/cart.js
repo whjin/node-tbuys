@@ -1,7 +1,7 @@
 module.exports = function (app) {
     //查看购物车商品
     app.get('/cart', function (req, res) {
-        var Cart = global.dbHelper.getModel('cart');
+        let Cart = global.dbHelper.getModel('cart');
         if (!req.session.user) {
             req.session.error = "用户已过期，请重新登录:";
             res.redirect('/login');
@@ -18,7 +18,7 @@ module.exports = function (app) {
             req.session.error = "用户已过期，请重新登录:";
             res.redirect('/login');
         } else {
-            var Commodity = global.dbHelper.getModel('commodity'),
+            let Commodity = global.dbHelper.getModel('commodity'),
                 Cart = global.dbHelper.getModel('cart');
             Cart.findOne({ "uId": req.session.user._id, "cId": req.params.id }, async function (error, doc) {
                 //商品已存在 +1
@@ -51,15 +51,15 @@ module.exports = function (app) {
     //删除购物车商品
     app.get("/delFromCart/:id", function (req, res) {
         //req.params.id 获取商品ID号
-        var Cart = global.dbHelper.getModel('cart');
-        Cart.remove({ "_id": req.params.id }, function (error, doc) {
+        let Cart = global.dbHelper.getModel('cart');
+        Cart.deleteOne({ "_id": req.params.id }, function (error, doc) {
             res.redirect('/cart');
         });
     });
 
     //购物车结算
     app.post("/cart/clearing", function (req, res) {
-        var Cart = global.dbHelper.getModel('cart');
+        let Cart = global.dbHelper.getModel('cart');
         Cart.updateOne({ "_id": req.body.cid }, { $set: { cQuantity: req.body.cnum, cStatus: true } }, function (error, doc) {
             res.sendStatus(200);
         });
