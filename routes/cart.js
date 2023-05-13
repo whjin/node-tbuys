@@ -20,37 +20,28 @@ module.exports = function (app) {
         } else {
             var Commodity = global.dbHelper.getModel('commodity'),
                 Cart = global.dbHelper.getModel('cart');
-            Cart.findOne({ "uId": req.session.user._id, "cId": req.params.id }, function (error, doc) {
+            Cart.findOne({ "uId": req.session.user._id, "cId": req.params.id }, async function (error, doc) {
                 //商品已存在 +1
                 if (doc) {
-                    Cart.update({
+                    Cart.updateOne({
                         "uId": req.session.user._id,
                         "cId": req.params.id
-                    }, { $set: { cQuantity: doc.cQuantity + 1 } }, function (error, doc) {
-                        //成功返回1  失败返回0
-                        if (doc > 0) {
-                            res.redirect('/home');
-                        }
+                    }, { $set: { cQuantity: doc.cQuantity + 1 } }, function (err, doc) {
+                        res.redirect('/home');
                     });
-                    //商品未存在，添加
                 } else {
+                    //商品未存在，添加
                     Commodity.findOne({ "_id": req.params.id }, function (error, doc) {
-                        if (doc) {
-                            Cart.create({
-                                uId: req.session.user._id,
-                                cId: req.params.id,
-                                cName: doc.name,
-                                cPrice: doc.price,
-                                cImgSrc: doc.imgSrc,
-                                cQuantity: 1
-                            }, function (error, doc) {
-                                if (doc) {
-                                    res.redirect('/home');
-                                }
-                            });
-                        } else {
-
-                        }
+                        Cart.create({
+                            uId: req.session.user._id,
+                            cId: req.params.id,
+                            cName: doc.name,
+                            cPrice: doc.price,
+                            cImgSrc: doc.imgSrc,
+                            cQuantity: 1
+                        }, function (error, doc) {
+                            res.redirect('/home');
+                        });
                     });
                 }
             });
@@ -62,21 +53,15 @@ module.exports = function (app) {
         //req.params.id 获取商品ID号
         var Cart = global.dbHelper.getModel('cart');
         Cart.remove({ "_id": req.params.id }, function (error, doc) {
-            //成功返回1  失败返回0
-            if (doc > 0) {
-                res.redirect('/cart');
-            }
+            res.redirect('/cart');
         });
     });
 
     //购物车结算
     app.post("/cart/clearing", function (req, res) {
         var Cart = global.dbHelper.getModel('cart');
-        Cart.update({ "_id": req.body.cid }, { $set: { cQuantity: req.body.cnum, cStatus: true } }, function (error, doc) {
-            //更新成功返回1  失败返回0
-            if (doc > 0) {
-                res.send(200);
-            }
+        Cart.updateOne({ "_id": req.body.cid }, { $set: { cQuantity: req.body.cnum, cStatus: true } }, function (error, doc) {
+            res.sendStatus(200);
         });
     });
 };

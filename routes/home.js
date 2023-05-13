@@ -21,9 +21,9 @@ module.exports = function (app) {
             imgSrc: req.body.imgSrc
         }, function (error, doc) {
             if (doc) {
-                res.send(200);
+                res.sendStatus(200);
             } else {
-                res.send(404);
+                res.sendStatus(404);
             }
         });
     });

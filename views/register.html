@@ -5,8 +5,6 @@
   <title>用户注册</title>
   <meta charset="utf-8">
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <script src="/js/jquery-2.1.1.min.js" type="text/javascript"></script>
-  <script src="/js/bootstrap.min.js" type="text/javascript"></script>
   <style type="text/css">
     .panel-body {
       padding: 30px 50px 0 50px;
@@ -21,26 +19,6 @@
       font-weight: bold;
     }
   </style>
-  <script type="text/javascript">
-    function register () {
-      var name = $('#username').val(),
-        password = $('#password').val();
-      var data = { "uname": name, upwd: password };
-      $.ajax({
-        url: '/register',
-        type: 'POST',
-        data: data,
-        success: function (data, status) {
-          if (status == 'success') {
-            location.href = 'login';
-          }
-        },
-        error: function (data, err) {
-          location.href = 'register';
-        }
-      });
-    }
-  </script>
 </head>
 
 <body>
@@ -74,6 +52,28 @@
         </div>
       </div>
   </div>
+  <script src="/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    function register () {
+      var name = $('#username').val(),
+        password = $('#password').val();
+      var data = { "uname": name, upwd: password };
+      $.ajax({
+        url: '/register',
+        type: 'POST',
+        data: data,
+        success: function (data, status) {
+          if (status == 'success') {
+            location.href = 'login';
+          }
+        },
+        error: function (data, err) {
+          location.href = 'register';
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

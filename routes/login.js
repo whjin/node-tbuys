@@ -8,18 +8,17 @@ module.exports = function (app) {
             uname = req.body.uname;
         User.findOne({ name: uname }, function (error, doc) {
             if (error) {
-                res.send(500);
-                console.log(error);
+                res.sendStatus(500);
             } else if (!doc) {
                 req.session.error = '用户名不存在！';
-                res.send(404);
+                res.sendStatus(404);
             } else {
                 if (req.body.upwd != doc.password) {
                     req.session.error = "密码错误!";
-                    res.send(404);
+                    res.sendStatus(404);
                 } else {
                     req.session.user = doc;
-                    res.send(200);
+                    res.sendStatus(200);
                 }
             }
         });
