@@ -25,17 +25,21 @@
 		.spys li div strong {
 			color: red;
 		}
+
+		ul li.list-group-item {
+			cursor: pointer;
+		}
 	</style>
 </head>
 
 <body>
 	<div style="margin:50px auto;width: 900px;">
 		<div class="panel panel-default">
-			<div class="panel-heading" style="height: 40px;">
-				<div style="text-align: left">
+			<div class="panel-heading">
+				<div style="display: flex;align-items: center;justify-content: space-between;">
 					<span style="font-size:20px; font-weight:bold;">商品展示页</span>
-					<div style="float: right;">
-						<a class="btn  btn-xs btn-success" href="addcommodity" style="margin-right: 35px;">添加商品</a>
+					<div style="display: flex;align-items: center;">
+						<a class="btn btn-xs btn-success" href="addcommodity" style="margin-right: 35px;">添加商品</a>
 						<a class="btn btn-xs btn-success" href="cart" style="margin-right: 35px;">购物车</a>
 						<a class="btn btn-xs btn-info" href="logout">退 出</a>
 					</div>
@@ -66,19 +70,25 @@
 			</div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading" style="height: 40px;">
+			<div class="panel-heading">
 				<div style="text-align: left">
-					<span style="font-size:20px; font-weight:bold;">图片抓取</span>
-
+					<span style="font-size:20px; font-weight:bold;">实例展示</span>
 				</div>
 			</div>
 			<div class="panel-body">
-
+				<ul class="list-group">
+					<li class="list-group-item">
+						<a href="/crawler">图片抓取</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	<script src="/js/jquery-2.1.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script>
+		$('.list-group').on('click',)
+	</script>
 </body>
 
 </html>

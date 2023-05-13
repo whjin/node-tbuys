@@ -44,7 +44,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 require('./routes')(app);
 
 app.get('/', function (req, res) {

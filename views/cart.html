@@ -15,48 +15,13 @@
             background-color: #F7F7F7;
         }
 
-        .cart-body ul li {
-            list-style-type: none;
-            margin-left: -30px;
-            width: 870px;
-        }
-
-        .cart-body ul li div {
-            float: left;
-            height: 80px;
-        }
-
         .li-checkbox input {
             margin: 20px 5px 0 0;
         }
 
-        .li-img a img {
+        .li-img {
             width: 40px;
             height: 50px;
-        }
-
-        .li-content {
-            margin: 20px 0 0 30px;
-            width: 280px;
-        }
-
-        .li-price {
-            margin: 20px 0 0 60px;
-            width: 100px;
-        }
-
-        .li-quantity {
-            margin: 20px 0 0 130px;
-            width: 100px;
-        }
-
-        .li-del {
-            margin: 20px 0 0 30px;
-            width: 50px;
-        }
-
-        .li-img {
-            margin: 0 0 0 10px;
         }
     </style>
 </head>
@@ -74,45 +39,41 @@
             </div>
             <div>
                 <div class="cart-heading">
-                    <div style="padding: 10px 0 0 10px">
-                        <span style="margin-right: 200px;">
+                    <div style="height: 40px;line-height: 40px;display: flex;">
+                        <span style="flex: 1;margin-left: 10px;">
                             <input id="CheckAll" type="checkbox"> 全选
                         </span>
-                        <span style="margin-right: 180px;">商品</span>
-                        <span style="margin-right: 210px;">价格</span>
-                        <span style="margin-right: 80px;">数量</span>
-                        <span style="padding-right: 0px;">操作</span>
+                        <span style="flex: 2;">商品</span>
+                        <span style="flex: 1;">价格</span>
+                        <span style="flex: 1;">数量</span>
+                        <span style="flex: 1;">操作</span>
                     </div>
                 </div>
                 <div class="cart-body">
-                    <ul>
+                    <ul style="margin-left: -30px;">
                         <%for(let i in carts){ if(!carts[i].cId)continue%>
-                            <li>
-                                <div class="li-checkbox">
+                            <li style="display: flex;align-items: center;height: 80px;">
+                                <div style="flex: 1;">
                                     <input data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>"
                                         name="chkItem" class="li-checkbox input" type="checkbox" />
                                 </div>
-                                <div class="li-img">
-                                    <a>
-                                        <img class="li-img a img" src="/images/<%=carts[i].cImgSrc%>">
-                                    </a>
-                                </div>
-                                <div class="li-content">
-                                    <a>
+                                <div style="flex: 2;">
+                                    <img class="li-img" src="/images/<%=carts[i].cImgSrc%>">
+                                    <span>
                                         <%=carts[i].cName%>
-                                    </a>
+                                    </span>
                                 </div>
-                                <div class="li-price">
+                                <div style="flex: 1;">
                                     <span>
                                         <%=carts[i].cPrice%>
                                     </span>
                                 </div>
-                                <div class="li-quantity">
+                                <div class="li-quantity" style="flex: 1;">
                                     <a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs ">+</a>
-                                    <input id="Q<%=i%>" style="width: 40px;" type="text" value="<%=carts[i].cQuantity%>">
+                                    <input id="Q<%=i%>" style="width: 40px;text-align: center;" type="text" value="<%=carts[i].cQuantity%>">
                                     <a data-type='subtr' href="javascript:void(0);" class="btn btn-default btn-xs">-</a>
                                 </div>
-                                <div class="li-del">
+                                <div style="flex: 1;">
                                     <a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-primary btn-xs">删除</a>
                                 </div>
                             </li>

@@ -19,6 +19,7 @@
 2. `npm install`安装依赖和相关插件;
 3. 安装`MongoDB`,设定数据库存放位置`mongod --dbpath "D:\MongoDB\data\tbuysdb"`，可以自主设定，启动数据库；
 4. 运行项目`node app.js`,打开浏览器进行测试，端口号`3000`，可自由设定监听端口
+5. 运行`server.bat`一键运行`mongodb`和`node`服务
 
 ## 依赖更新解决 ##
 

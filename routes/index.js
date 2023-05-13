@@ -4,4 +4,5 @@ module.exports = function (app) {
     require('./logout')(app);
     require('./register')(app);
     require('./cart')(app);
+    require('./crawler')(app);
 };
