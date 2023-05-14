@@ -16,5 +16,8 @@ module.exports = {
     cImgSrc: { type: String },
     cQuantity: { type: Number },
     cStatus: { type: Boolean, default: false }
+  },
+  crawler: {
+    uCount: { type: Number }
   }
 };

@@ -7,6 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <title>图片抓取</title>
+  <style>
+    .image-box img {
+      width: 192px;
+      height: 108px;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,14 +22,18 @@
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <span style="font-size: 20px;font-weight: bold;">图片抓取</span>
           <div>
-            <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crawlerModal">开始</button>
+            <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crawlerModal" onclick="start()">开始</button>
             <button class="btn btn-xs btn-success" onclick="reset()">重置</button>
             <a class="btn btn-xs btn-info" href="/home">返回</a>
           </div>
         </div>
       </div>
       <div class="panel-body">
-        
+        <div class="image-box">
+          <!-- <%for(let i=0;i<count;i++){%>
+            <img src="<%=i%>"/>
+            <%}%> -->
+        </div>
       </div>
       <div class="modal fade" id="crawlerModal" role="dialog">
         <div class="modal-dialog">
@@ -47,16 +57,24 @@
   <script src="/js/jquery-2.1.1.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script>
+    function start () {
+      $('#siteUrl').val(localStorage.getItem("siteUrl"));
+    }
     function confirm () {
       let siteUrl = $('#siteUrl').val();
       if (siteUrl) {
-        let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
-        if (reg.test(siteUrl)) {
-          localStorage.setItem("siteUrl", siteUrl);
+        let storage = localStorage.getItem("siteUrl");
+        if (siteUrl == storage) {
           $('#crawlerModal').modal('hide');
-          alert("设置成功");
         } else {
-          alert("网站地址非法");
+          let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
+          if (reg.test(siteUrl)) {
+            localStorage.setItem("siteUrl", siteUrl);
+            $('#crawlerModal').modal('hide');
+            alert("设置成功");
+          } else {
+            alert("网站地址非法");
+          }
         }
       } else {
         alert("网站地址不能为空");

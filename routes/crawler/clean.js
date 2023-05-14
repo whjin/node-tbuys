@@ -10,4 +10,4 @@ function cleanImg (folderPath) {
   }
 }
 
-cleanImg(path.join(__dirname, 'img'));
+cleanImg("public/crawlerImg");
