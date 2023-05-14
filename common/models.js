@@ -18,6 +18,6 @@ module.exports = {
     cStatus: { type: Boolean, default: false }
   },
   crawler: {
-    uCount: { type: Number }
+    cList: { type: Array }
   }
 };

@@ -8,9 +8,15 @@
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <title>图片抓取</title>
   <style>
+    .image-box {
+      margin-left: 12px;
+    }
+
     .image-box img {
       width: 192px;
       height: 108px;
+      margin: 8px;
+      border: 1px solid #c1c1c1;
     }
   </style>
 </head>
@@ -30,9 +36,9 @@
       </div>
       <div class="panel-body">
         <div class="image-box">
-          <!-- <%for(let i=0;i<count;i++){%>
-            <img src="<%=i%>"/>
-            <%}%> -->
+          <%for(let i=0;i<list.length;i++){%>
+            <img src="<%=list[i]%>" />
+            <%}%>
         </div>
       </div>
       <div class="modal fade" id="crawlerModal" role="dialog">
@@ -79,9 +85,11 @@
       } else {
         alert("网站地址不能为空");
       }
+      location.href = "crawler?type=start";
     }
 
     function reset () {
+      location.href = "crawler?type=reset";
       if (localStorage.getItem('siteUrl')) {
         localStorage.removeItem("siteUrl");
         alert("重置成功");
