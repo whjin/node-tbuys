@@ -18,6 +18,7 @@ module.exports = {
     cStatus: { type: Boolean, default: false }
   },
   crawler: {
+    cSite: { type: String },
     cList: { type: Array }
   }
 };

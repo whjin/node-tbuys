@@ -68,6 +68,8 @@
     }
     function confirm () {
       let siteUrl = $('#siteUrl').val();
+      const url = new URL("https://www.baidu.com/");
+      console.log("12333", url.origin);
       if (siteUrl) {
         let storage = localStorage.getItem("siteUrl");
         if (siteUrl == storage) {
@@ -79,13 +81,13 @@
             $('#crawlerModal').modal('hide');
             alert("设置成功");
           } else {
-            alert("网站地址非法");
+            return alert("网站地址非法");
           }
         }
       } else {
-        alert("网站地址不能为空");
+        return alert("网站地址不能为空");
       }
-      location.href = "crawler?type=start";
+      // location.href = `crawler?type=start&site=${siteUrl}`;
     }
 
     function reset () {
