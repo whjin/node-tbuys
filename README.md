@@ -31,6 +31,11 @@
 - 这个项目的数据存放在`MongoDB`下的`data/tbuysdb`文件夹下，这个文件夹是手动创建的，可以根据需要自行调整；
 - 连接数据库的操作步骤是：在`cmd/PowerShell`或Linux终端上进入`mongodb/bin`文件夹，Windows用户可以进入`mongodb/bin`文件夹按住Shift键点击鼠标右键可以快速进入`cmd/PowerShell`，输入MongoDB数据库启动命令：`mongod --dbpath "数据存放位置"`（上面有提及）。如果在操作时没有响应，可以按`Ctrl+X`键即可。
 
+## 网站图片抓取
+
+- 创建图片下载目录`public/crawlerImg`
+- 开始抓取`start_crawler.bat`，清空图片`clean_image.bat`
+
 ## 后续 ##
 
 > 此项目只是完成了基本的内容，如果感兴趣，可以进行扩展，变更，使这个电商网站系统更加完善，稳定。
