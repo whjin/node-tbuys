@@ -64,36 +64,34 @@
   <script src="/js/bootstrap.min.js"></script>
   <script>
     function start () {
-      $('#siteUrl').val(localStorage.getItem("siteUrl"));
+      $('#siteUrl').val(localStorage.getItem("site"));
     }
     function confirm () {
       let siteUrl = $('#siteUrl').val();
-      const url = new URL("https://www.baidu.com/");
-      console.log("12333", url.origin);
+      let site;
       if (siteUrl) {
-        let storage = localStorage.getItem("siteUrl");
-        if (siteUrl == storage) {
-          $('#crawlerModal').modal('hide');
-        } else {
-          let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
-          if (reg.test(siteUrl)) {
-            localStorage.setItem("siteUrl", siteUrl);
-            $('#crawlerModal').modal('hide');
-            alert("设置成功");
-          } else {
-            return alert("网站地址非法");
+        let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
+        if (reg.test(siteUrl)) {
+          let storage = localStorage.getItem("site");
+          site = new URL(siteUrl).origin;
+          if (site !== storage) {
+            localStorage.setItem("site", site);
           }
+          $('#crawlerModal').modal('hide');
+          alert("设置成功");
+        } else {
+          return alert("网站地址不合法");
         }
       } else {
         return alert("网站地址不能为空");
       }
-      // location.href = `crawler?type=start&site=${siteUrl}`;
+      location.href = `crawler?type=start&site=${site}`;
     }
 
     function reset () {
       location.href = "crawler?type=reset";
-      if (localStorage.getItem('siteUrl')) {
-        localStorage.removeItem("siteUrl");
+      if (localStorage.getItem('site')) {
+        localStorage.removeItem("site");
         alert("重置成功");
       }
     }
