@@ -2,18 +2,17 @@ const request = require("request");
 const path = require("path");
 const fs = require("fs");
 const cheerio = require("cheerio");
-const url = require("url");
+const clean = require("./clean");
 
 const imgDir = 'public/crawlerImg';
 
-function start (site, callback) {
-  request(site, async function (err, res, body) {
+function start (siteUrl, imgUrl, callback) {
+  request(siteUrl, async function (err, res, body) {
     if (err) {
       return new Error(err);
     }
     if (res) {
-      // console.log(JSON.parse(JSON.stringify(res.request.uri)));
-      let list = await findImg(site, body, downLoad);
+      let list = await findImg(imgUrl, body, downLoad);
       callback(list);
     }
   });
@@ -42,42 +41,57 @@ function findImg (site, dom, callback) {
   return imgList;
 }
 
-function downLoad (site, filename) {
-  request(site).pipe(fs.createWriteStream(path.join(imgDir, filename)));
+function downLoad (url, filename) {
+  request(url).pipe(fs.createWriteStream(path.join(imgDir, filename)));
 }
 
 module.exports = function (app) {
-  app.get('/crawler', function (req, res) {
-    const { type, site } = req.query;
-    let Crawler = global.dbHelper.getModel('crawler');
-    if (type == "reset") {
-      res.render("crawler", { list: [] });
-    } else {
-      Crawler.findOne({}, async function (err, doc) {
-        if (err) {
-          res.sendStatus(500);
-        } else {
-          if (doc) {
-            start(doc.site, async list => {
-              await Crawler.updateOne({}, {
-                $set: {
-                  cSite: doc.site,
-                  cList: list
+  app.get('/crawler', async function (req, res) {
+    try {
+      await clean.cleanImg(imgDir);
+      if (Object.keys(req.query).length) {
+        const { type, siteUrl, imgUrl } = req.query;
+        let Crawler = global.dbHelper.getModel('crawler');
+        if (type == "start") {
+          Crawler.findOne({}, async function (err, doc) {
+            if (err) {
+              res.redirect("/crawler");
+            } else {
+              start(siteUrl, imgUrl, async list => {
+                if (doc) {
+                  await Crawler.updateOne({}, {
+                    $set: {
+                      cSiteUrl: siteUrl,
+                      cImgUrl: imgUrl,
+                      cList: list
+                    }
+                  });
+                } else {
+                  await Crawler.create({
+                    cSiteUrl: siteUrl,
+                    cImgUrl: imgUrl,
+                    cList: list
+                  });
                 }
+                res.render("crawler", { list });
               });
-              res.render("crawler", { list });
-            });
-          } else {
-            start(site, async list => {
-              await Crawler.create({
-                cSite: site,
-                cList: list
-              });
-              res.render("crawler", { list });
-            });
-          }
+            }
+          });
+        } else {
+          await Crawler.updateOne({}, {
+            $set: {
+              cSiteUrl: "",
+              cImgUrl: "",
+              cList: []
+            }
+          });
+          res.render("crawler", { list: [] });
         }
-      });
+      } else {
+        res.render("crawler", { list: [] });
+      }
+    } catch (err) {
+      res.redirect("/login");
     }
   });
 };

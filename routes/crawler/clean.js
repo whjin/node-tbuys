@@ -10,4 +10,4 @@ function cleanImg (folderPath) {
   }
 }
 
-cleanImg("public/crawlerImg");
+module.exports.cleanImg = cleanImg;

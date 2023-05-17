@@ -49,8 +49,16 @@
               <button class="close" data-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
-              <label for="siteUrl" class="col-form-label">网站地址</label>
-              <input type="text" class="form-control" id="siteUrl" placeholder="请填写网站地址">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="siteUrl" class="col-form-label">网站首页地址</label>
+                  <input type="text" class="form-control" id="siteUrl" placeholder="请填写网站首页地址" />
+                </div>
+                <div class="col-md-6">
+                  <label for="imgUrl" class="col-form-label">图片服务地址</label>
+                  <input type="text" class="form-control" id="imgUrl" placeholder="请填写图片服务地址" />
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button class="btn btn-primary" onclick="confirm()">确认</button>
@@ -64,36 +72,39 @@
   <script src="/js/bootstrap.min.js"></script>
   <script>
     function start () {
-      $('#siteUrl').val(localStorage.getItem("site"));
+      $('#siteUrl').val(localStorage.getItem("siteUrl"));
+      $('#imgUrl').val(localStorage.getItem("imgUrl"));
     }
     function confirm () {
       let siteUrl = $('#siteUrl').val();
-      let site;
-      if (siteUrl) {
+      let imgUrl = $("#imgUrl").val();
+      if (siteUrl && imgUrl) {
         let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
-        if (reg.test(siteUrl)) {
-          let storage = localStorage.getItem("site");
-          site = new URL(siteUrl).origin;
-          if (site !== storage) {
-            localStorage.setItem("site", site);
+        if (reg.test(siteUrl) && reg.test(imgUrl)) {
+          let siteUrlstorage = localStorage.getItem("siteUrl");
+          let imgUrlStorage = localStorage.getItem("imgUrl");
+          if (siteUrl !== siteUrlstorage) {
+            localStorage.setItem("siteUrl", siteUrl);
+          }
+          if (imgUrl !== imgUrlStorage) {
+            localStorage.setItem("imgUrl", imgUrl);
           }
           $('#crawlerModal').modal('hide');
           alert("设置成功");
         } else {
-          return alert("网站地址不合法");
+          return alert("地址不合法");
         }
       } else {
-        return alert("网站地址不能为空");
+        return alert("配置信息不能为空");
       }
-      location.href = `crawler?type=start&site=${site}`;
+      location.href = `crawler?type=start&siteUrl=${siteUrl}&imgUrl=${imgUrl}`;
     }
 
     function reset () {
       location.href = "crawler?type=reset";
-      if (localStorage.getItem('site')) {
-        localStorage.removeItem("site");
-        alert("重置成功");
-      }
+      localStorage.removeItem("siteUrl");
+      localStorage.removeItem("imgUrl");
+      alert("重置成功");
     }
   </script>
 </body>

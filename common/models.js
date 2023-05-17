@@ -18,7 +18,8 @@ module.exports = {
     cStatus: { type: Boolean, default: false }
   },
   crawler: {
-    cSite: { type: String },
+    cSiteUrl: { type: String },
+    cImgUrl: { type: String },
     cList: { type: Array }
   }
 };
