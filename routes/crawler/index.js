@@ -3,7 +3,6 @@ const path = require("path");
 const fs = require("fs");
 const cheerio = require("cheerio");
 const clean = require("./clean");
-const axios = require("axios");
 
 const imgDir = "public/crawlerImg";
 
