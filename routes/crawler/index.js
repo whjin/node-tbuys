@@ -23,16 +23,13 @@ module.exports = function (app) {
               }
               start(siteUrl, imgUrl, async (list) => {
                 if (doc) {
-                  if (JSON.stringify(list) !== JSON.stringify(doc.cList)) {
-                    await Crawler.updateOne({}, {
-                      $set: {
-                        cSiteUrl: siteUrl,
-                        cImgUrl: imgUrl,
-                        cList: list,
-                      },
-                    }
-                    );
-                  }
+                  await Crawler.updateOne({}, {
+                    $set: {
+                      cSiteUrl: siteUrl,
+                      cImgUrl: imgUrl,
+                      cList: list,
+                    },
+                  });
                 } else {
                   await Crawler.create({
                     cSiteUrl: siteUrl,
@@ -45,14 +42,6 @@ module.exports = function (app) {
             }
           });
         } else {
-          await Crawler.updateOne({}, {
-            $set: {
-              cSiteUrl: "",
-              cImgUrl: "",
-              cList: [],
-            },
-          }
-          );
           res.render("crawler", { list: [] });
         }
       } else {
@@ -83,10 +72,12 @@ module.exports = function (app) {
       if (imgSrc && imgSrc.includes(".")) {
         let srcItem;
         if (imgSrc.includes("//")) {
-          let protocol = site.split("//").shift();
-          srcItem = imgSrc.startsWith(protocol)
-            ? imgSrc
-            : `${protocol}${imgSrc}`;
+          if (imgSrc.startsWith("http")) {
+            srcItem = imgSrc;
+          } else {
+            const { protocol } = new URL(site);
+            srcItem = protocol + imgSrc;
+          }
         } else {
           imgSrc = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
           srcItem = site + imgSrc;
@@ -99,7 +90,6 @@ module.exports = function (app) {
           filename = `${i}.png`;
         }
         imgList.push(srcItem);
-        callback(srcItem, filename);
       }
     });
     return imgList;

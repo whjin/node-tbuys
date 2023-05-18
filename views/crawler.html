@@ -52,7 +52,7 @@
               <button class="close" data-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
-              <div class="row g-3">
+              <div class="row">
                 <div class="col-md-6">
                   <label for="siteUrl" class="col-form-label">网站首页地址</label>
                   <input type="text" class="form-control" id="siteUrl" placeholder="请填写网站首页地址" />
@@ -85,21 +85,14 @@
       if (siteUrl && imgUrl) {
         let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
         if (reg.test(siteUrl) && reg.test(imgUrl)) {
-          let siteUrlstorage = localStorage.getItem("siteUrl");
+          let siteUrlStorage = localStorage.getItem("siteUrl");
           let imgUrlStorage = localStorage.getItem("imgUrl");
-          if (siteUrl !== siteUrlstorage) {
-            siteUrl = siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
+          if (siteUrl !== siteUrlStorage) {
             localStorage.setItem("siteUrl", siteUrl);
           }
           if (imgUrl !== imgUrlStorage) {
-            imgUrl = imgUrl.endsWith("/") ? imgUrl.slice(0, -1) : imgUrl;
             localStorage.setItem("imgUrl", imgUrl);
           }
-          let params = {
-            type: "start",
-            siteUrl,
-            imgUrl
-          };
           $('#crawlerModal').modal('hide');
           alert("设置成功");
         } else {
