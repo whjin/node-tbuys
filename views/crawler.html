@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/images/favicon-32x32.png">
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <title>图片抓取</title>
   <style>
@@ -17,6 +18,7 @@
       height: 108px;
       margin: 8px;
       border: 1px solid #c1c1c1;
+      background-color: #910740;
     }
   </style>
 </head>
@@ -28,7 +30,8 @@
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <span style="font-size: 20px;font-weight: bold;">图片抓取</span>
           <div>
-            <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crawlerModal" onclick="start()">开始</button>
+            <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#crawlerModal"
+              onclick="start()">开始</button>
             <button class="btn btn-xs btn-success" onclick="reset()">重置</button>
             <a class="btn btn-xs btn-info" href="/home">返回</a>
           </div>
@@ -75,6 +78,7 @@
       $('#siteUrl').val(localStorage.getItem("siteUrl"));
       $('#imgUrl').val(localStorage.getItem("imgUrl"));
     }
+
     function confirm () {
       let siteUrl = $('#siteUrl').val();
       let imgUrl = $("#imgUrl").val();
@@ -84,11 +88,18 @@
           let siteUrlstorage = localStorage.getItem("siteUrl");
           let imgUrlStorage = localStorage.getItem("imgUrl");
           if (siteUrl !== siteUrlstorage) {
+            siteUrl = siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
             localStorage.setItem("siteUrl", siteUrl);
           }
           if (imgUrl !== imgUrlStorage) {
+            imgUrl = imgUrl.endsWith("/") ? imgUrl.slice(0, -1) : imgUrl;
             localStorage.setItem("imgUrl", imgUrl);
           }
+          let params = {
+            type: "start",
+            siteUrl,
+            imgUrl
+          };
           $('#crawlerModal').modal('hide');
           alert("设置成功");
         } else {

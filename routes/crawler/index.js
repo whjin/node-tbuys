@@ -3,74 +3,42 @@ const path = require("path");
 const fs = require("fs");
 const cheerio = require("cheerio");
 const clean = require("./clean");
+const axios = require("axios");
 
-const imgDir = 'public/crawlerImg';
-
-function start (siteUrl, imgUrl, callback) {
-  request(siteUrl, async function (err, res, body) {
-    if (err) {
-      return new Error(err);
-    }
-    if (res) {
-      let list = await findImg(imgUrl, body, downLoad);
-      callback(list);
-    }
-  });
-}
-
-function findImg (site, dom, callback) {
-  let $ = cheerio.load(dom);
-  const imgList = [];
-  $('img').each(function (i, elem) {
-    let imgSrc = $(this).attr('src');
-    if (imgSrc.includes(".")) {
-      let srcItem;
-      if (imgSrc.includes("//")) {
-        let protocol = site.split("//").shift();
-        srcItem = imgSrc.startsWith(protocol) ? imgSrc : `${protocol}${imgSrc}`;
-      } else {
-        imgSrc = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
-        srcItem = site + imgSrc;
-      }
-      let ext = imgSrc.split(".").pop();
-      let filename = `${i}.${ext}`;
-      imgList.push(srcItem);
-      callback(srcItem, filename);
-    }
-  });
-  return imgList;
-}
-
-function downLoad (url, filename) {
-  request(url).pipe(fs.createWriteStream(path.join(imgDir, filename)));
-}
+const imgDir = "public/crawlerImg";
 
 module.exports = function (app) {
-  app.get('/crawler', async function (req, res) {
+  app.get("/crawler", async function (req, res) {
     try {
-      await clean.cleanImg(imgDir);
+      clean.cleanImg(imgDir);
       if (Object.keys(req.query).length) {
         const { type, siteUrl, imgUrl } = req.query;
-        let Crawler = global.dbHelper.getModel('crawler');
+        let Crawler = global.dbHelper.getModel("crawler");
         if (type == "start") {
           Crawler.findOne({}, async function (err, doc) {
             if (err) {
-              res.redirect("/crawler");
+              res.render("crawler");
             } else {
-              start(siteUrl, imgUrl, async list => {
+              if (!fs.existsSync(imgDir)) {
+                fs.mkdirSync(imgDir);
+              }
+              start(siteUrl, imgUrl, async (list) => {
                 if (doc) {
-                  await Crawler.updateOne({}, {
-                    $set: {
-                      cSiteUrl: siteUrl,
-                      cImgUrl: imgUrl,
-                      cList: list
+                  if (JSON.stringify(list) !== JSON.stringify(doc.cList)) {
+                    await Crawler.updateOne({}, {
+                      $set: {
+                        cSiteUrl: siteUrl,
+                        cImgUrl: imgUrl,
+                        cList: list,
+                      },
                     }
-                  });
+                    );
+                  }
                 } else {
                   await Crawler.create({
                     cSiteUrl: siteUrl,
                     cImgUrl: imgUrl,
-                    cList: list
+                    cList: list,
                   });
                 }
                 res.render("crawler", { list });
@@ -82,9 +50,10 @@ module.exports = function (app) {
             $set: {
               cSiteUrl: "",
               cImgUrl: "",
-              cList: []
-            }
-          });
+              cList: [],
+            },
+          }
+          );
           res.render("crawler", { list: [] });
         }
       } else {
@@ -94,4 +63,50 @@ module.exports = function (app) {
       res.redirect("/login");
     }
   });
+
+  function start (siteUrl, imgUrl, callback) {
+    request(siteUrl, async function (err, res, body) {
+      if (err) {
+        return new Error(err);
+      }
+      if (res) {
+        let list = await findImg(imgUrl, body, downLoad);
+        callback(list);
+      }
+    });
+  }
+
+  function findImg (site, dom, callback) {
+    let $ = cheerio.load(dom);
+    const imgList = [];
+    $("img").each(function (i, elem) {
+      let imgSrc = $(this).attr("src");
+      if (imgSrc && imgSrc.includes(".")) {
+        let srcItem;
+        if (imgSrc.includes("//")) {
+          let protocol = site.split("//").shift();
+          srcItem = imgSrc.startsWith(protocol)
+            ? imgSrc
+            : `${protocol}${imgSrc}`;
+        } else {
+          imgSrc = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
+          srcItem = site + imgSrc;
+        }
+        let filename;
+        if (path.extname(imgSrc)) {
+          let ext = imgSrc.split(".").pop();
+          filename = `${i}.${ext}`;
+        } else {
+          filename = `${i}.png`;
+        }
+        imgList.push(srcItem);
+        callback(srcItem, filename);
+      }
+    });
+    return imgList;
+  }
+
+  function downLoad (url, filename) {
+    request(url).pipe(fs.createWriteStream(path.join(imgDir, filename)));
+  }
 };

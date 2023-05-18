@@ -4,6 +4,7 @@
 <head>
     <title>购物车</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="/images/favicon-32x32.png">
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
         .cart-heading {
@@ -54,7 +55,8 @@
                         <%for(let i in carts){ if(!carts[i].cId)continue%>
                             <li style="display: flex;align-items: center;height: 80px;">
                                 <div style="flex: 1;">
-                                    <input data-id="<%=carts[i]._id%>" data-index="<%=i%>" data-price="<%=carts[i].cPrice%>"
+                                    <input data-id="<%=carts[i]._id%>" data-index="<%=i%>"
+                                        data-price="<%=carts[i].cPrice%>"
                                         name="chkItem" class="li-checkbox input" type="checkbox" />
                                 </div>
                                 <div style="flex: 2;">
@@ -70,7 +72,8 @@
                                 </div>
                                 <div class="li-quantity" style="flex: 1;">
                                     <a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs ">+</a>
-                                    <input id="Q<%=i%>" style="width: 40px;text-align: center;" type="text" value="<%=carts[i].cQuantity%>">
+                                    <input id="Q<%=i%>" style="width: 40px;text-align: center;" type="text"
+                                        value="<%=carts[i].cQuantity%>">
                                     <a data-type='subtr' href="javascript:void(0);" class="btn btn-default btn-xs">-</a>
                                 </div>
                                 <div style="flex: 1;">
@@ -82,7 +85,8 @@
                 </div>
                 <div style="float: right;height: 35px;width:330px;">
                     总计：<span id="money" style="color: red;font-size: 25px">￥0.00</span>
-                    <input type="button" style="width: 130px;float:right;" class="btn btn-success" onclick=" Clearing();"
+                    <input type="button" style="width: 130px;float:right;" class="btn btn-success"
+                        onclick=" Clearing();"
                         value="结 算" />
                 </div>
             </div>
