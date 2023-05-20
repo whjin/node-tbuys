@@ -42,6 +42,11 @@ module.exports = function (app) {
             }
           });
         } else {
+          await Crawler.updateOne({}, {
+            cSiteUrl: "",
+            cImgUrl: "",
+            cList: [],
+          });
           res.render("crawler", { list: [] });
         }
       } else {
